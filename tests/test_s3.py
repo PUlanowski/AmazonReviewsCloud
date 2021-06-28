@@ -1,4 +1,5 @@
-from src.create_s3 import another_sum
+from src.create_s3 import config_exists
 
-def test_another_sum():
-    assert another_sum(3, 2) == 5
+#check if config exists
+def test_config_exists():
+    assert config_exists() == True
