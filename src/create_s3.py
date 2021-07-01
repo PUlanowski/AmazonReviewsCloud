@@ -4,10 +4,21 @@ import configparser
 import logging
 import os.path
 from botocore.exceptions import ClientError
-log = logging.getLogger()
 
+def logging_setup():
+
+    logging.basicConfig(filename = 'log.txt',
+                        level = logging.INFO,
+                        format = '[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s',
+                        datefmt='%H:%M:%S',
+                        filemode='w'
+                        )
+    log = logging.getLogger()
+
+    return log
 
 def config_exists():
+    log = logging_setup()
     if os.path.isfile('C:\\Users\\pit\\Google Drive\\Data Engineering\\Projects\\amazon_reviews\\main.cfg') == True:
         return True
     else:
@@ -32,6 +43,7 @@ def s3_client_start():
     return s3_client
 
 def create_buckets():
+    log = logging_setup()
     config = config_read()
     s3_client = s3_client_start()
     bucket_name = [config['S3BUCKET']['NAME_RAW'],config['S3BUCKET']['NAME_FINAL']]
@@ -41,7 +53,7 @@ def create_buckets():
         buckets = [bucket['Name'] for bucket in bucket_check['Buckets']]
 
         for name in bucket_name:
-            if (bucket_name in buckets):
+            if (name in buckets):
                 log.warning('Bucket {} already exists'.format(name))
             else:
                 s3_client.create_bucket(Bucket = name)
@@ -53,6 +65,7 @@ def create_buckets():
     return True
 
 if __name__=="__main__":
+    logging_setup()
     config_exists()
     config_read()
     s3_client_start()
