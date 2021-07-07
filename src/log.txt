@@ -1,2 +1,1 @@
-[21:37:13] {C:/Users/pit/Google Drive/Data Engineering/Projects/amazon_reviews/src/create_s3.py:57} WARNING - Bucket amazon-reviews-raw-data already exists
-[21:37:14] {C:/Users/pit/Google Drive/Data Engineering/Projects/amazon_reviews/src/create_s3.py:60} INFO - Bucket amazon-reviews-final-data created
+[23:25:17] {C:/Users/pit/Google Drive/Data Engineering/Projects/amazon_reviews/src/create_s3.py:25} WARNING - config file missing
